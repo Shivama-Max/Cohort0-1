@@ -1,68 +1,67 @@
 //Lets see an async function without using promises
 const fs = require('fs');
 
-// function readFileFunc(fun){
-     //An async fn
-//     fs.readFile("a.txt","utf-8",function(err,data){
-//         fun(data)
-//     });
-// }
-// function show(x){
-//     console.log(x)
-// }
-// readFileFunc(show)
+function readFileFunc(fun){
+    fs.readFile("a.txt","utf-8",function(err,data){
+        fun(data)
+    });
+}
+function show(x){
+    console.log(x)
+}
+readFileFunc(show)
 
 // This is an ugly way to write an async function
 // Now, lets use promises
 
-// function readFileFunc(){
-//     console.log("inside the function")
-//     return new Promise(function(resolve){
-//         console.log("inside promise");
-//         fs.readFile("a.txt","utf-8",function(err,data){
-//             console.log("before resolve")
-//             resolve(data)
-//         });
-//     })
-// }
-// function show(x){
-//     console.log(x)
-// }
-// readFileFunc().then(show)
+function readFileFunc(){
+    console.log("inside the function")
+    return new Promise(function(resolve){
+        console.log("inside promise");
+        fs.readFile("a.txt","utf-8",function(err,data){
+            console.log("before resolve")
+            resolve(data)
+        });
+    })
+}
+function show(x){
+    console.log(x)
+}
+readFileFunc().then(show)
 
 //Async - Await
 
 // Async await is a better syntax than .then to accept / get resolved promises
 //Here is an example without Async await
-// function fun(){
-//     let p = new Promise(function(resolve){
-//         setTimeout(function(){
-//             resolve("hello");
-//         },3000)
-//     });
-//     return p;
-// }
-// function main(){
-//     fun().then(function(val){
-//         console.log(val);
-//     })
-// }
-// main();
+function fun(){
+    let p = new Promise(function(resolve){
+        setTimeout(function(){
+            resolve("hello");
+        },3000)
+    });
+    return p;
+}
+function main(){
+    fun().then(function(val){
+        console.log(val);
+    })
+}
+main();
 
 //Using Async-Await
-// function fun(){
-//     let p = new Promise(function(resolve){
-//         setTimeout(function(){
-//             resolve("hello");
-//         },3000)
-//     });
-//     return p;
-// }
-// async function main(){
-//     const val = await fun()
-//     console.log(val);
-// }
-// main();
+function fun(){
+    let p = new Promise(function(resolve){
+        setTimeout(function(){
+            resolve("hello");
+        },3000)
+    });
+    return p;
+}
+async function main(){
+    const val = await fun()
+    console.log(val);
+}
+main();
 
 //As we can see , the confusing parts like .then have been removed to get a cleaner code using async and await
 
