@@ -1,0 +1,68 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+.menu{
+    padding-top: 10px ;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    box-shadow: 2px 1px 2px #eee;
+}
+.menu img{
+    padding-left: 100px;
+    width: 170px;
+}
+.menu div ul{
+    padding-top: 10px;
+    list-style: none;
+    padding-right: 100px;
+}
+.menu div ul li{
+    
+    color: #666;
+    display: inline;
+    padding: 20px;
+}
+.menu div ul li:hover{
+    color: #387ed1;
+    cursor: pointer;
+}
+.hero{
+    display: flex;
+    justify-content: center;
+}
+.hero img{
+    margin-top: 20px;
+}
+.bot{
+    display: flex;
+    justify-content: center;
+}
+.bot h1{
+    font-size: 40;
+    font-weight: 500;
+    margin-top: 30px;
+}
+.bot h2{
+    font-weight: 400;
+    margin-top: 50px;
+}
+.butback{
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.but{
+    font-size: 20px;
+    background-color: #387ed1;
+    border: 1px solid rgba(0, 0, 0,0);
+    color: white;
+    border-radius: 2px;
+    padding: 10px 30px;
+}
+.but:hover{
+    background-color: #111;
+    cursor: pointer;
+}
