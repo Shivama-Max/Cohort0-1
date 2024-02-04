@@ -1,0 +1,40 @@
+<!-- 
+    FETCH API
+    To send a request to the backend to get the data.
+    We will be using this - https://fakerapi.it/api/v1/persons
+    to get data of 10 people and show it on owr page
+    Function to be used - FETCH
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //Fetch is an async call
+        //1st way 
+        // function getData(){
+        //     fetch("https://fakerapi.it/api/v1/persons")
+        //     .then(function(response){
+        //         const json = response.json()
+        //         .then(function(res){
+        //             console.log(res)
+        //         })
+        //     })
+            
+        // }
+
+        //2nd way
+
+        async function getData(){
+            const response = await fetch("https://fakerapi.it/api/v1/persons")
+            const finalRes = await response.json()
+            console.log(finalRes)
+        }
+    </script>
+    <button onclick="getData()">Get Data</button>
+</body>
+</html>
