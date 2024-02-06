@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script>
+    function printSum(){
+        let num1 = document.getElementById("num1").value
+        let num2 = document.getElementById("num2").value
+
+        //1st way - directly running it on frontend
+        // document.getElementById("output").innerHTML = parseInt(num1)+parseInt(num2)
+
+        //2nd way - better, bcz some functions might be expensive and will be slow if ran on FE - fetching it from BE
+        //Created a BE - server.js - localhost:3000/sum
+        //We want to get the data from this server
+
+        
+    }
+</script>
+
+<body>
+    <div>
+        <input type="text" placeholder="Number 1" id = "num1" /><br/>
+        <input type="text" placeholder="Number 2" id = "num2" />
+    </div>
+    
+    <button onclick="printSum()">Sum</button>
+    <div id = "output">
+
+    </div>
+</body>
+</html>

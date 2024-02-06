@@ -9,7 +9,11 @@ const app = express()
 const jwt = require("jsonwebtoken")
 const jwtpass = "123456"
 const mongoose = require("mongoose")
-mongoose.connect("mongodb+srv://admin:FRYJKDCFErW5sbZd@cluster0.yqyjkwo.mongodb.net/user_app")
+const PORT = env.PORT
+mongoose.connect(PORT)
+
+
+
 
 app.use(express.json())
 
