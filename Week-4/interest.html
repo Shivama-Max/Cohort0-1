@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    async function printInterest(){
+        const p = document.getElementById("p").value
+        const r = document.getElementById("r").value
+        const t = document.getElementById("t").value
+
+        const response = await fetch(`http://localhost:3000/interest?principal=${p}&rate=${r}&time=${t}`)
+        const ans = await response.json()
+
+        document.getElementById("output").innerHTML = "Total Amount : "+ans.total+ "   Interest : "+ans.interest
+
+
+    }
+</script>
+<body>
+    <div>
+        <input type="text" placeholder="principal" id = "p" /><br/>
+        <input type="text" placeholder="Rate" id = "r" /><br/>
+        <input type="text" placeholder="Time" id = "t" />
+    </div>
+    
+    <button onclick="printInterest()">Calculate Interest</button>
+    <div id = "output">
+
+    </div>
+</body>
+</html>

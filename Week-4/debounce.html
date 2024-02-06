@@ -1,0 +1,53 @@
+<!-- 
+Without debouncing, every time a user types a character in either of the input fields, 
+a request would be sent to the backend. This could lead to a high number of unnecessary
+requests, especially if the user is typing continuously or making frequent adjustments.
+This not only puts a strain on the server but can also lead to a poor user experience 
+due to the constant processing and updating of data.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script>
+    //debounced function
+    let timeout;
+    function debouncedPrintSum(){
+        //delay the call to printSum() until not called for 100ms & have been called at least once
+
+        //For delaying the function by 100ms, we can use setTimeOut
+        //But, let's say we are typing , then we need to remove this timeout and setTimeout again...
+        //for this , we need to use clearTimeout()
+        //Anytime this(v) block is called, we clear the previous clock , and start a new clock
+        clearTimeout(timeout)                     
+
+        //FLOW
+        //Type "1" >> debounccedPrintSum() >> nothing to clear now >> timeout for 100ms started>> Type "2" >> clear the previous clock , if not executed yet >> start a new clock >> and so on...
+        
+        timeout = setTimeout(function(){
+            printSum()
+        },500)
+    }
+    async function printSum(){
+        let num1 = document.getElementById("num1").value
+        let num2 = document.getElementById("num2").value
+        const response = await fetch(`http://localhost:3000/sum?a=${num1}&b=${num2}`)
+        const ans = await response.text()
+        document.getElementById("output").innerHTML = ans
+    }
+</script>
+
+<body>
+    <div>
+        <input oninput="debouncedPrintSum()" type="text" placeholder="Number 1" id = "num1" /><br/>
+        <input oninput="debouncedPrintSum()" type="text" placeholder="Number 2" id = "num2" />
+    </div>
+    <div id = "output">
+
+    </div>
+</body>
+</html>
