@@ -232,7 +232,7 @@ app.post('/healthy',(req,res)=>{
     const response = schema.safeParse(kidneys)
     if(!response.success){
         res.status(411).json({
-            msg : "Invalid Inputs"
+            msg : "Invalid Inputs..."
         })
     }
     else{
