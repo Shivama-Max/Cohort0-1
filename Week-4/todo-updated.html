@@ -1,0 +1,82 @@
+ <!-- 
+    In the previous webapp that we made, we just had to click a todo button and then a new element was added which contained the title, description, and a mark as done button
+
+    THE NEW PROBLEM
+    ---------------
+     - We have to fetch todos from backend
+     - addTodo() sends a request to add a new todo with given title and desc
+     - removeTodo() sends a request to remove a todo
+     - updateTodo() sends a request to update a todo
+     - The backend will return us something like this
+            [
+                {
+                    id : 1,
+                    title : "abcd",
+                    desc : "abcde"
+                },
+                {
+                    id : 2,
+                    title : "abcdefg",
+                    desc : "abcd"
+                },
+            ]
+     - After which, we need to render this on our website.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <input id="title" type="text" placeholder="Title" /><br>
+        <input id="desc" type="text" placeholder="Description" /><br>
+    </div>
+    <div id="container">
+ 
+    </div> 
+</body>
+<script>
+    let globalID = 1;
+    function createChild(title,desc,id){
+        const child = document.createElement("div")
+        const firstGrandChild = document.createElement("div") //title
+        firstGrandChild.innerHTML = title
+        const secondGrandChild = document.createElement("div") //description
+        secondGrandChild.innerHTML = desc
+        const thirdGrandChild = document.createElement("button") //button
+        thirdGrandChild.innerHTML = "Mark as Done"
+        thirdGrandChild.setAttribute("onclick",`markAsDone(${id})`)
+
+        child.appendChild(firstGrandChild)
+        child.appendChild(secondGrandChild)
+        child.appendChild(thirdGrandChild)
+        child.setAttribute("id",id) //giving unique id to the element
+
+        return child //returns the outer div with all the elements
+    }
+    //state will always be an array
+    //every element of state will have title,desc and id
+    function updateDom(state){
+        const parent = document.getElementById("container")
+        parent.innerHTML   = ""
+        for(let i=0;i<state.length;i++){
+            const child = createChild(state[i].title,state[i].desc,state[i].id)
+            parent.appendChild(child)
+        }
+    }
+    //this is a bad solution, as everytime we get the data from the server,
+    //we are clearing the screen first, and then we are rendering the new data
+    // A BETTER WAY
+    // ------------
+    // A better way would be to calculate the diff between the existing and 
+    // to be appended data and render only the data that is new 
+    window.setInterval(async function(){
+        const res = await fetch("http://localhost:3000/todos")
+        const json = await res.json()
+        updateDom(json.todos)
+    },5000)
+</script>
+</html>

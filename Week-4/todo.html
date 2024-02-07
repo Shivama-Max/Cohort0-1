@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    let globalID = 1; //to give id to each todo created
+    //lets make creating child another function
+    function createChild(title,desc,id){
+        //document.createElement
+        //We want it to look somewhat like this
+        //<div>
+        //  <div>title</div>
+        //  <div>desc</div>
+        //  <button>"Mark as Done"</button>
+        //</div>
+        const child = document.createElement("div")
+        const firstGrandChild = document.createElement("div") //title
+        firstGrandChild.innerHTML = title
+        const secondGrandChild = document.createElement("div") //description
+        secondGrandChild.innerHTML = desc
+        const thirdGrandChild = document.createElement("button") //button
+        thirdGrandChild.innerHTML = "Mark as Done"
+        thirdGrandChild.setAttribute("onclick",`markAsDone(${id})`)
+
+        child.appendChild(firstGrandChild)
+        child.appendChild(secondGrandChild)
+        child.appendChild(thirdGrandChild)
+        child.setAttribute("id",id) //giving unique id to the element
+
+        return child //returns the outer div with all the elements
+    }
+    function addTodo(){
+        const title = document.getElementById("title").value
+        const desc = document.getElementById("desc").value
+        const parent = document.getElementById("container")
+
+        parent.appendChild(createChild(title,desc,globalID++))
+        //everytime a new todo is appended, globalID increases by 1 to maintain the uniqueness of ids
+
+    }
+    function markAsDone(todoId){
+        parent = document.getElementById(todoId)
+        parent.children[2].innerHTML = "Done!!"
+        //children[0] -> title div
+        //children[1] -> desc div
+        //children[2] -> button
+    }
+</script>
+<body>
+    <div>
+        <input id="title" type="text" placeholder="Title" /><br>
+        <input id="desc" type="text" placeholder="Description" /><br>
+        <button onclick="addTodo()">Add todo</button>
+    </div>
+    <!-- 
+        In past assignments, we had to print sum/interest , which will change as per the input
+        But now, we have to append the data i.e. add data to existing data for it to be considered as a todo application
+        For this, we cant just get id of a div and change the innerHTML, we need to do sth else
+     -->
+     <!-- 
+        We will be using createElement for this 
+     -->
+    <div id="container">
+ 
+    </div> 
+</body>
+</html>
