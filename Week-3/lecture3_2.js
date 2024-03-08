@@ -11,7 +11,7 @@ const jwtpass = "123456"
 const mongoose = require("mongoose")
 
 require("dotenv").config({path: '../.env'})
-const PORT = env.PORT
+const PORT = process.env.PORT
 mongoose.connect(PORT)
 
 app.use(express.json())
