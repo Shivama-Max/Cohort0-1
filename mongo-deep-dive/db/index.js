@@ -1,7 +1,9 @@
 const mongoose = require("mongoose")
 
 require("dotenv").config({path : '../.env'})
-const URI = process.env.URI;
+// const URI = process.env.URI; 
+//For JWT, using different DB
+const URI = process.env.URI2;
 mongoose.connect(URI)
 
 

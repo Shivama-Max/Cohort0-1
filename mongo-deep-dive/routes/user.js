@@ -1,6 +1,8 @@
 const express = require("express");
 const userMiddleware = require("../middleware/user");
 const { User,Course } = require("../db");
+const jwt = require("jsonwebtoken")
+const {JWT_SECRET} = require("../config")
 const router = express.Router()
 
 router.post('/signup',async (req,res)=>{
@@ -16,6 +18,28 @@ router.post('/signup',async (req,res)=>{
     })
 })
 
+router.post('/signin',async(req,res)=>{
+    const username = req.body.username;
+    const password = req.body.password;
+
+    const user = await User.find({
+        username,
+        password
+    })
+    if(user){
+        const token = jwt.sign({
+            username
+        },JWT_SECRET);
+        res.json({
+            token
+        })
+    }else{
+        res.status(411).json({
+            msg : "Incorrect email & password..."
+        })
+    }
+})
+
 router.get('/courses',async (req,res)=>{
     const response = await Course.find({})
     res.json({
@@ -25,8 +49,11 @@ router.get('/courses',async (req,res)=>{
 
 router.post('/courses/:courseId',userMiddleware,async (req,res)=>{
     const courseId = req.params.courseId;
-    const username = req.headers.username;
+    //For Username Password
+    // const username = req.headers.username;
 
+    //For JWT
+    const username = req.username;
     await User.updateOne({
         username : username
     },{
