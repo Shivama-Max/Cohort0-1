@@ -30,7 +30,7 @@ var users = [{
 
 app.get('/',(req,res)=>{
     const johnKidneys = users[0].kidneys
-    const noOfKidneys = johnKidneys.length
+    const noOfKidneys = johnKidneys.length  //2
     let noOfHealthyKidneys = 0;
     for(let i=0;i<johnKidneys.length;i++){
         if(johnKidneys[i].healthy){

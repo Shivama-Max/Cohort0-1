@@ -209,7 +209,7 @@ app.listen(3000)
 //That's why, we use Zod Library
 
 
-//GLOBAL CATHCHES
+//GLOBAL CATCHES
 //If we check the preview pane in postman or in any browser, we will be able to see what error has occured. We don't want this to be exposed to clients.
 //For this , we use global catches
 //It is used at the end of code

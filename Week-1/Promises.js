@@ -15,11 +15,11 @@ readFileFunc(show)
 // Now, lets use promises
 
 function readFileFunc(){
-    console.log("inside the function")
+    // console.log("inside the function")
     return new Promise(function(resolve){
-        console.log("inside promise");
+        // console.log("inside promise");
         fs.readFile("a.txt","utf-8",function(err,data){
-            console.log("before resolve")
+            // console.log("before resolve")
             resolve(data)
         });
     })
